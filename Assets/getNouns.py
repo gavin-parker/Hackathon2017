@@ -14,17 +14,20 @@ import sys
 #'''
 
 def main():
-    return "hi"
     text = sys.argv[1]
     blob = TextBlob(text)
     blob.tags           # [('The', 'DT'), ('titular', 'JJ'),
                         #  ('threat', 'NN'), ('of', 'IN'), ...]
     
     mynewtext = blob.noun_phrases
-    print(mynewtext)    # WordList(['titular threat', 'blob',
+    #print(mynewtext)    # WordList(['titular threat', 'blob',
                         #            'ultimate movie monster',
                         #            'amoeba-like mass', ...])
-    return mynewtext
+    output = ""
+    for word in mynewtext:
+        output += word + " "
+    print(output)
+    return output
     #blob.translate(to="es")  # 'La amenaza titular de The Blob...'
 
 if __name__ == "__main__":

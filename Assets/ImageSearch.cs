@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 public class ImageSearch : MonoBehaviour
 {
 
-    private string api = "https://pixabay.com/api/?key=7045395-a2d27739a618f360c06fb3c3f&q=";
+    private string api = "https://pixabay.com/api/?key=7045395-a2d27739a618f360c06fb3c3f&&per_page=3&safesearch=true&q=";
 
     public void setImage(string search_term)
     {
@@ -17,19 +17,26 @@ public class ImageSearch : MonoBehaviour
 
     IEnumerator getImages(string term)
     {
+
         UnityWebRequest www = UnityWebRequest.Get(api + term);
-        yield return www.SendWebRequest();  
-
-        if (www.isNetworkError || www.isHttpError)
+        yield return www.SendWebRequest();
+        try
         {
-            Debug.Log(www.error.ToString());
+            if (www.isNetworkError || www.isHttpError)
+            {
+                Debug.Log(www.error.ToString());
 
+            }
+            else
+            {
+                // Show results as text
+                ImageResponse response = JsonUtility.FromJson<ImageResponse>(www.downloadHandler.text);
+                StartCoroutine(getImageData(response.hits[0].webformatURL, response.hits[0].webFormatWidth, response.hits[0].webFormatHeight));
+            }
         }
-        else
+        catch (Exception e)
         {
-            // Show results as text
-            ImageResponse response = JsonUtility.FromJson<ImageResponse>(www.downloadHandler.text);
-            StartCoroutine(getImageData(response.hits[0].webformatURL, response.hits[0].webFormatWidth, response.hits[0].webFormatHeight));
+
         }
     }
 

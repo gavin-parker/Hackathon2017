@@ -12,7 +12,10 @@ public class VideoFeed : MonoBehaviour
     WebCamTexture webcamTexture;
     bool started = false;
     Texture2D currentFrame;
-    private ImageTextCapture _imageTextCapture;
+    public ImageTextCapture _imageTextCapture;
+    
+    private List<String> text; 
+    
     IEnumerator openWebcam()
     {
         yield return new WaitForSeconds(2.0f);
@@ -43,6 +46,7 @@ public class VideoFeed : MonoBehaviour
             webcamTexture.Play();
             yield return new WaitForSeconds(0.5f);
             started = true;
+            StartCoroutine(getText());
         }
         else
         {
@@ -53,7 +57,6 @@ public class VideoFeed : MonoBehaviour
     {
         _imageTextCapture = new ImageTextCapture();
         StartCoroutine(openWebcam());
-        
     }
 
     // Update is called once per frame
@@ -68,12 +71,19 @@ public class VideoFeed : MonoBehaviour
                 currentFrame.Apply();
                 data = currentFrame.EncodeToPNG();
                 
-                List<String> text = _imageTextCapture.FindText(data);
-                foreach (var words in text)
-                {
-                    Debug.Log(words);
-                }
+
             }
+        }
+    }
+
+    IEnumerator getText()
+    {
+
+        while (true)
+        {
+            yield return new WaitForSeconds(1.0f);
+            //List<String> text = _imageTextCapture.FindText(data);
+            StartCoroutine(_imageTextCapture.FindText(data));
         }
     }
 
