@@ -17,6 +17,7 @@ namespace DefaultNamespace
     {
         HttpWebRequest webRequest;
         public List<String> readList = new List<string>();
+        public List<BoundingPoly> boundPoly = new List<BoundingPoly>();
 
 
         public IEnumerator FindText(byte[] imageBytes)
@@ -62,13 +63,8 @@ namespace DefaultNamespace
             if (rootObject != null)
             {
                 readList.Clear();
-                foreach (var s in rootObject.print())
-                {
-                    readList.Add(s);
-                }
+                rootObject.print(readList, boundPoly);
             }
-            
-            
         }
     }
 }
