@@ -17,10 +17,11 @@ public class TextAnnotation
     public string locale { get; set; }
     public string description { get; set; }
     public BoundingPoly boundingPoly { get; set; }
-
-    public string print()
+    
+    public void print(List<String> words, List<BoundingPoly> position)
     {
-        return description;
+        words.Add(description);
+        position.Add(boundingPoly);
     }
 }
 
@@ -172,7 +173,7 @@ public class Respons
     public List<TextAnnotation> textAnnotations { get; set; }
     public FullTextAnnotation fullTextAnnotation { get; set; }
 
-    public List<String> print()
+    public List<String> print(List<String> words, List<BoundingPoly> position)
     {
         List<String> res = new List<string>();
         if (textAnnotations != null)
@@ -185,7 +186,7 @@ public class Respons
                     skip = false;
                     continue;
                 }
-                res.Add(t.print());
+                t.print(words, position);
             }
         }
         return res;
@@ -197,19 +198,12 @@ public class RootObject
 {
     public List<Respons> responses { get; set; }
     
-    
-    public List<String> print()
+    public void print(List<String> words, List<BoundingPoly> position)
     {
         List<String> result = new List<string>();
         foreach (var r in responses)
         {
-
-            List<String> rr = r.print();
-            foreach (var items in rr)
-            {
-                result.Add(items);
-            }
+            r.print(words, position);
         }
-        return result;
     }
 }
