@@ -43,32 +43,22 @@ public class cleanText : MonoBehaviour {
     }
     private void run_cmd(string text)
     {
-        //string fileName = "/Hackathon2017/Assets/getNouns.py";
         UnityEngine.Debug.Log(Environment.CurrentDirectory);
+        string path = @"C:\Users\gavin\workspace\Hackathon\Assets\getNouns.py";
+        System.Diagnostics.Process process = new System.Diagnostics.Process();
+        System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+        startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+        startInfo.FileName = @"C:\Users\gavin\Anaconda3\python.exe";
+        startInfo.Arguments = path + " \'" + text + "\'";
+        startInfo.RedirectStandardOutput = true;
 
-        string path = Path.Combine(Environment.CurrentDirectory, @"/Assets/getNouns.py");
-        //string path = Path.Combine(Environment.CurrentDirectory, @"Data\", fileName);
-        string[] args = { path, text };
-        string cmd = "/usr/local/bin/python"; 
-
-        ProcessStartInfo start = new ProcessStartInfo();
-        start.FileName = cmd;
-        start.Arguments = string.Format("{0} {1}", cmd, args);
-        start.UseShellExecute = false;
-        start.RedirectStandardOutput = true;
-        start.RedirectStandardError = true;
-
-        Process process = Process.Start(start);
-        UnityEngine.Debug.Log("Process started yeyy");
-        UnityEngine.Debug.Log("Reading output");
+        startInfo.UseShellExecute = false;
+        process.StartInfo = startInfo;
+        process.Start();
         string result = process.StandardOutput.ReadToEnd();
-        string err = process.StandardError.ReadToEnd();
-        //process.OutputDataReceived += (sender, e) => { if (e != null) UnityEngine.Debug.Log(e.Data); };
-        //process.BeginOutputReadLine();
         process.WaitForExit();
-        UnityEngine.Debug.Log(result);
-        UnityEngine.Debug.Log(err);
 
+        UnityEngine.Debug.Log(result);
 
     }
 }
