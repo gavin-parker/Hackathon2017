@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 
 public class VideoFeed : MonoBehaviour
@@ -10,6 +12,7 @@ public class VideoFeed : MonoBehaviour
     WebCamTexture webcamTexture;
     bool started = false;
     Texture2D currentFrame;
+    private ImageTextCapture _imageTextCapture;
     IEnumerator openWebcam()
     {
         yield return Application.RequestUserAuthorization(UserAuthorization.WebCam);
@@ -18,7 +21,7 @@ public class VideoFeed : MonoBehaviour
             webcamTexture = new WebCamTexture();
             renderer.material.mainTexture = webcamTexture;
             webcamTexture.Play();
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(0.5f);
             started = true;
         }
         else
@@ -28,6 +31,7 @@ public class VideoFeed : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        _imageTextCapture = new ImageTextCapture();
         StartCoroutine(openWebcam());
     }
 
@@ -42,6 +46,12 @@ public class VideoFeed : MonoBehaviour
                 currentFrame.SetPixels(webcamTexture.GetPixels());
                 currentFrame.Apply();
                 data = currentFrame.EncodeToPNG();
+                
+                List<String> text = _imageTextCapture.FindText(data);
+                foreach (var words in text)
+                {
+                    Debug.Log(words);
+                }
             }
         }
     }
