@@ -18,12 +18,30 @@ public class VideoFeed : MonoBehaviour
     
     IEnumerator openWebcam()
     {
+        yield return new WaitForSeconds(2.0f);
         yield return Application.RequestUserAuthorization(UserAuthorization.WebCam);
         if (Application.HasUserAuthorization(UserAuthorization.WebCam))
         {
-            Debug.Log(WebCamTexture.devices);
 
-            webcamTexture = new WebCamTexture();
+           
+            //Debug.Log(WebCamTexture.devices);
+            
+            WebCamDevice[] devices = WebCamTexture.devices;
+            //Debug.Log(devices.Length);
+            //webcamTexture = new WebCamTexture();
+
+            if (devices.Length > 1)
+            {
+                webcamTexture = new WebCamTexture(devices[1].name);
+                //Debug.Log("got here!");
+
+            }
+            else
+            {
+                Debug.Log("only one camera...soz...");
+                //webcamTexture = new WebCamTexture(devices[0].name);
+            }
+
             renderer.material.mainTexture = webcamTexture;
             webcamTexture.Play();
             yield return new WaitForSeconds(0.5f);
