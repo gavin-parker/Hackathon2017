@@ -10,6 +10,7 @@ public class VideoFeed : MonoBehaviour
     WebCamTexture webcamTexture;
     bool started = false;
     Texture2D currentFrame;
+    public ImageSearch floating_image;
     IEnumerator openWebcam()
     {
         yield return Application.RequestUserAuthorization(UserAuthorization.WebCam);
@@ -29,6 +30,8 @@ public class VideoFeed : MonoBehaviour
     void Start()
     {
         StartCoroutine(openWebcam());
+        GameObject newImage = Instantiate(floating_image.gameObject);
+        newImage.GetComponent<ImageSearch>().setImage("cat");
     }
 
     // Update is called once per frame
