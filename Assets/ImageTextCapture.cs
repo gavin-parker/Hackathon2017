@@ -64,7 +64,6 @@ namespace DefaultNamespace
                 readList.Clear();
                 foreach (var s in rootObject.print())
                 {
-                    Debug.Log(s);
                     readList.Add(s);
                 }
             }
