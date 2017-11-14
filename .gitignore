@@ -25,3 +25,5 @@ Library/
 
 *.ide
 .vs/
+ProjectSettings/QualitySettings.asset
+ProjectSettings/EditorBuildSettings.asset
