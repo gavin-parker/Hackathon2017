@@ -7,6 +7,7 @@ using UnityEngine.Networking;
 public class ImageSearch : MonoBehaviour
 {
 
+    public string this_string = "";
     private string api = "https://pixabay.com/api/?key=7045395-a2d27739a618f360c06fb3c3f&&per_page=3&safesearch=true&q=";
 
     public void setImage(string search_term)

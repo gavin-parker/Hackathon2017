@@ -63,6 +63,7 @@ namespace DefaultNamespace
             if (rootObject != null)
             {
                 readList.Clear();
+                boundPoly.Clear();
                 rootObject.print(readList, boundPoly);
             }
         }

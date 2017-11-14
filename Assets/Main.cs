@@ -19,12 +19,22 @@ public class Main : MonoBehaviour {
         while(true)
         {
             yield return new WaitForSeconds(5.0f);
+            int i = 0;
+            List<BoundingPoly> polys = feed._imageTextCapture.boundPoly;
             List<string> words = feed._imageTextCapture.readList;
-            foreach(string word in words)
+            foreach (string word in words)
             {
                 images[position_index].gameObject.SetActive(true);
                 images[position_index].setImage(word);
+                images[position_index].this_string = word;
+                Vector3 screenPos = feed.renderer.gameObject.transform.position;
+                Vector3 bottomleft = screenPos;
+                bottomleft.x = screenPos.x - feed.renderer.gameObject.transform.localScale.x / 2;
+                bottomleft.y = screenPos.y - feed.renderer.gameObject.transform.localScale.y / 2;
+
+                Debug.DrawLine(images[position_index].gameObject.transform.position, new Vector3(1, 0, 0), Color.red);
                 position_index = (position_index + 1) % images.Count;
+                i++;
             }
 
             
