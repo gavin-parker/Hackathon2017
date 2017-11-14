@@ -16,11 +16,13 @@ namespace DefaultNamespace
     public class ImageTextCapture
     {
         HttpWebRequest webRequest;
+        private List<String> readList;
 
-        void FinishWebRequest(IAsyncResult result)
+        public ImageTextCapture()
         {
-            webRequest.EndGetResponse(result);
+            readList = new List<string>();
         }
+       
 
         public IEnumerator FindText(byte[] imageBytes)
         {
@@ -58,23 +60,21 @@ namespace DefaultNamespace
             requestU.downloadHandler = (DownloadHandler) new DownloadHandlerBuffer();
             requestU.SetRequestHeader("Content-Type", "application/json");
 
-
             yield return requestU.SendWebRequest();
-
 
             RootObject rootObject = JsonConvert.DeserializeObject<RootObject>(requestU.downloadHandler.text);
 
-
-            foreach (var s in rootObject.print())
+            if (rootObject != null)
             {
-                Debug.Log(s);
+                readList.Clear();
+                foreach (var s in rootObject.print())
+                {
+                    Debug.Log(s);
+                    readList.Add(s);
+                }
             }
-
+            
+            
         }
     }
-
-
-
-
-
 }
