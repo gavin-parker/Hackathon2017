@@ -16,7 +16,7 @@ namespace DefaultNamespace
     public class ImageTextCapture
     {
         HttpWebRequest webRequest;
-        private List<String> readList;
+        public List<String> readList;
 
         public ImageTextCapture()
         {
