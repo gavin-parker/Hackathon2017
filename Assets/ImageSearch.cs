@@ -28,9 +28,7 @@ public class ImageSearch : MonoBehaviour
         else
         {
             // Show results as text
-            Debug.Log(www.downloadHandler.text);
             ImageResponse response = JsonUtility.FromJson<ImageResponse>(www.downloadHandler.text);
-            Debug.Log(response.hits[0].webformatURL);
             StartCoroutine(getImageData(response.hits[0].webformatURL, response.hits[0].webFormatWidth, response.hits[0].webFormatHeight));
         }
     }
@@ -48,7 +46,6 @@ public class ImageSearch : MonoBehaviour
         else
         {
             // Show results as text
-            Debug.Log(www.downloadHandler.text);
             // Or retrieve results as binary data
             byte[] results = www.downloadHandler.data;
             Texture2D image = new Texture2D(width, height);
