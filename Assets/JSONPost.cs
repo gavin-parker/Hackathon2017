@@ -172,17 +172,23 @@ public class Respons
     public List<TextAnnotation> textAnnotations { get; set; }
     public FullTextAnnotation fullTextAnnotation { get; set; }
 
-    public string print()
+    public List<String> print()
     {
-        string result = "";
+        List<String> res = new List<string>();
         if (textAnnotations != null)
         {
+            bool skip = true;
             foreach (var t in textAnnotations)
             {
-                result += t.print();
+                if (skip)
+                {
+                    skip = false;
+                    continue;
+                }
+                res.Add(t.print());
             }
         }
-        return result;
+        return res;
     }
 }
 
@@ -197,9 +203,12 @@ public class RootObject
         List<String> result = new List<string>();
         foreach (var r in responses)
         {
-            String res = r.print();
-            result.Add(res);
-            
+
+            List<String> rr = r.print();
+            foreach (var items in rr)
+            {
+                result.Add(items);
+            }
         }
         return result;
     }
