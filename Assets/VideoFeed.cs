@@ -36,7 +36,7 @@ public class VideoFeed : MonoBehaviour
             else
             {
                 Debug.Log("only one camera...soz...");
-                //webcamTexture = new WebCamTexture(devices[0].name);
+                webcamTexture = new WebCamTexture();
             }
 
             renderer.material.mainTexture = webcamTexture;
