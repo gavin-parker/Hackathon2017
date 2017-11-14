@@ -21,22 +21,17 @@ public class cleanText : MonoBehaviour {
 "most", "other", "some", "such", "no", "nor", "not", "only", "own", "same", "so",
 "than", "too", "very", "s", "t", "can", "will", "just", "don", "should", "now" };
 
-    //public string Trim(string textToConvert){
-
-    //    //string textToConvert = "The duck crossed the four lane road.";
-    //    string result = System.Text.RegularExpressions.Regex.Replace(textToConvert.ToLower(), @"(([-]|[.]|[-.]|[0-9])?[0-9]*([.]|[,])*[0-9]+)|(\b\w{1,2}\b)|([^\w])", " ");
-    //    Debug.Log(result.ToString());
-
-    //    StringBuilder inText = new StringBuilder(" " + result + " ");
-    //    foreach (string word in stopwords)
-    //    {
-    //        inText.Replace(" " + word + " ", " ");
-    //    }
-    //    Debug.Log(inText.ToString());
-
-    //    return (inText.ToString());
-
-    //}
+    public bool isNoun(string textToConvert){
+        textToConvert = System.Text.RegularExpressions.Regex.Replace(textToConvert.ToLower(), @"(([-]|[.]|[-.]|[0-9])?[0-9]*([.]|[,])*[0-9]+)|(\b\w{1,2}\b)|([^\w])", " ");
+        foreach (string word in stopwords)
+        {
+            if(word == textToConvert)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
     void Start(){
         //run_cmd("The quick brown fox jumps over the lazy dog.");
 
