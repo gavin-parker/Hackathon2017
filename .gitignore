@@ -27,3 +27,6 @@ Library/
 .vs/
 ProjectSettings/QualitySettings.asset
 ProjectSettings/EditorBuildSettings.asset
+Assets/mainScene.unity
+Assets/NounSearch.cs.meta
+*.meta

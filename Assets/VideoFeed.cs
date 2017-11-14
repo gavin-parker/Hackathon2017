@@ -43,6 +43,7 @@ public class VideoFeed : MonoBehaviour
             }
 
             renderer.material.mainTexture = webcamTexture;
+            Screen.SetResolution((int)Screen.width, (int)Screen.height, true);
             webcamTexture.Play();
             yield return new WaitForSeconds(0.5f);
             started = true;
