@@ -18,6 +18,8 @@ public class VideoFeed : MonoBehaviour
         yield return Application.RequestUserAuthorization(UserAuthorization.WebCam);
         if (Application.HasUserAuthorization(UserAuthorization.WebCam))
         {
+            Debug.Log(WebCamTexture.devices);
+
             webcamTexture = new WebCamTexture();
             renderer.material.mainTexture = webcamTexture;
             webcamTexture.Play();
@@ -33,6 +35,7 @@ public class VideoFeed : MonoBehaviour
     {
         _imageTextCapture = new ImageTextCapture();
         StartCoroutine(openWebcam());
+        
     }
 
     // Update is called once per frame
