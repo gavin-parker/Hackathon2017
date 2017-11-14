@@ -38,7 +38,7 @@ public class cleanText : MonoBehaviour {
 
     //}
     void Start(){
-        run_cmd("The quick brown fox jumps over the lazy dog.");
+        //run_cmd("The quick brown fox jumps over the lazy dog.");
 
     }
     private void run_cmd(string text)

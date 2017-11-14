@@ -12,7 +12,7 @@ public class VideoFeed : MonoBehaviour
     WebCamTexture webcamTexture;
     bool started = false;
     Texture2D currentFrame;
-    private ImageTextCapture _imageTextCapture;
+    public ImageTextCapture _imageTextCapture;
     
     private List<String> text; 
     
@@ -57,8 +57,6 @@ public class VideoFeed : MonoBehaviour
     {
         _imageTextCapture = new ImageTextCapture();
         StartCoroutine(openWebcam());
-        
-        
     }
 
     // Update is called once per frame

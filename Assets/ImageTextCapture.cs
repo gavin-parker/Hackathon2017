@@ -16,13 +16,8 @@ namespace DefaultNamespace
     public class ImageTextCapture
     {
         HttpWebRequest webRequest;
-        public List<String> readList;
+        public List<String> readList = new List<string>();
 
-        public ImageTextCapture()
-        {
-            readList = new List<string>();
-        }
-       
 
         public IEnumerator FindText(byte[] imageBytes)
         {
