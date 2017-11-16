@@ -26,7 +26,7 @@ namespace DefaultNamespace
             String base64String = Convert.ToBase64String(imageBytes);
 
             string endpoint =
-                "https://vision.googleapis.com/v1/images:annotate?key=AIzaSyDhX1jANfIk5IFxVtywrncpUCpwKKbcsHw";
+                "https://vision.googleapis.com/v1/images:annotate";
 
             String body = "{\"requests\":[{\"image\":{\"content\": \" " + base64String +
                           "\" },\"features\":[{\"type\":\"TEXT_DETECTION\"}]}]}";
@@ -63,6 +63,7 @@ namespace DefaultNamespace
             if (rootObject != null)
             {
                 readList.Clear();
+                boundPoly.Clear();
                 rootObject.print(readList, boundPoly);
             }
         }

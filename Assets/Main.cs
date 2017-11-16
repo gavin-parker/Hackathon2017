@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.UIElements;
 
 public class Main : MonoBehaviour {
 
@@ -20,8 +21,14 @@ public class Main : MonoBehaviour {
         {
             yield return new WaitForSeconds(5.0f);
             List<string> words = feed._imageTextCapture.readList;
+            for (int i = 0; i < images.Count; i++)
+            {
+                images[i].gameObject.SetActive(false);
+            }
+            position_index = 0;
             foreach(string word in words)
             {
+                Debug.Log(word);
                 images[position_index].gameObject.SetActive(true);
                 images[position_index].setImage(word);
                 position_index = (position_index + 1) % images.Count;
